@@ -1,0 +1,50 @@
+.\" Manpage for chroot_manager
+.TH CHROOT_MANAGER 1 "February 2025" "chroot_manager 1.0" "User Commands"
+.SH NAME
+chroot_manager \- chroot management tool with daemon logging support
+.SH SYNOPSIS
+.B chroot_manager
+[--verbose] [--daemon] <command>
+.SH DESCRIPTION
+The
+.B chroot_manager
+script provides commands to create, connect to, disconnect from, and manage a chroot jail.
+.PP
+It also supports a daemon mode (using --daemon) where the chroot session is run under
+strace to log all system calls from the chroot environment and its child processes.
+.PP
+Available commands:
+.TP
+.B create
+Creates a chroot jail using debootstrap.
+.TP
+.B connect
+Mounts required filesystems, sets up X access, and enters the chroot.
+With --daemon, the session is traced via strace.
+.TP
+.B disconnect
+Unmounts the filesystems from the chroot.
+.TP
+.B status
+Shows the mount status for the chroot jail.
+.TP
+.B install
+Installs chroot_manager to /usr/local/bin along with its man page and shell completions.
+.TP
+.B uninstall
+Removes the installed chroot_manager, its man page, and shell completions.
+.TP
+.B help
+Displays this help message.
+.SH OPTIONS
+.TP
+.B --verbose
+Enables verbose output.
+.TP
+.B --daemon
+Enables daemon mode for the connect command.
+.SH AUTHOR
+Written by Your Name.
+.SH COPYRIGHT
+This is free software; see the source for copying conditions. There is NO warranty.
+

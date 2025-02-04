@@ -1,0 +1,21 @@
+#!/bin/bash
+# Bash completion for chroot_manager
+
+_chroot_manager_completion() {
+    local cur prev opts cmds
+    COMPREPLY=()
+    cur="${COMP_WORDS[COMP_CWORD]}"
+    prev="${COMP_WORDS[COMP_CWORD-1]}"
+
+    cmds="create connect disconnect status install uninstall help"
+    opts="--verbose --daemon --help -h"
+
+    if [[ ${COMP_CWORD} == 1 ]]; then
+        COMPREPLY=( $(compgen -W "${cmds} ${opts}" -- ${cur}) )
+    else
+        COMPREPLY=( $(compgen -W "${opts}" -- ${cur}) )
+    fi
+}
+
+complete -F _chroot_manager_completion chroot_manager
+
