@@ -1,8 +1,3 @@
-Below is a sample `README.md` file for your project. You can adjust its content as needed:
-
----
-
-```markdown
 # chroot_manager
 
 **chroot_manager** is a fully featured tool for managing chroot environments on Debian‐based systems. It provides a simple command-line interface for creating, connecting to, disconnecting from, and monitoring a chroot jail. The tool supports daemon mode—using `strace`—to log all system calls made within the chroot environment, along with installation and uninstallation support for easy deployment.
