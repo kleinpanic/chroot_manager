@@ -48,11 +48,9 @@ IGNORE_LIST=(bash sh ls cat echo grep mount umount)
 # If running as root via sudo (SUDO_USER is set) but the environment isn’t fully preserved,
 # force a re-run with sudo -E. We use _ENV_PRESERVED as a marker to avoid an infinite loop.
 if [ -n "$SUDO_USER" ] && [ -z "$_ENV_PRESERVED" ]; then
-    # Check for essential environment variables (you can add others if needed).
-    if [ -z "$DISPLAY" ] || [ -z "$XAUTHORITY" ]; then
-        export _ENV_PRESERVED=1
-        exec sudo -E "$0" "$@"
-    fi
+    echo "Forcing re‑exec with preserved environment variables..."
+    export _ENV_PRESERVED=1
+    exec sudo -E "$0" "$@"
 fi
 
 # --- Logging Functions ---
