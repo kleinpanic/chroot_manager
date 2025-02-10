@@ -45,6 +45,11 @@ DAEMON_LOG_DIR="$(pwd)/chroot_daemon_logs"
 # List of trivial commands to ignore in daemon logs (basename only)
 IGNORE_LIST=(bash sh ls cat echo grep mount umount)
 
+# Force the script to run as root while preserving the environment
+if [ "$EUID" -ne 0 ]; then
+    exec sudo -E "$0" "$@"
+fi
+
 # --- Logging Functions ---
 function log_info() {
     echo "[INFO] $(date +'%F %T') $*" | tee -a "$LOGFILE"
