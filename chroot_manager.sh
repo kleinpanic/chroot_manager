@@ -172,10 +172,19 @@ function mount_filesystems() {
             log_debug "${CHROOT_DIR}/$d is already mounted."
         fi
     done
+
+    # Mount devpts to ensure pseudo-terminal support.
+    if ! mountpoint -q "${CHROOT_DIR}/dev/pts"; then
+        log_info "Mounting devpts to ${CHROOT_DIR}/dev/pts..."
+        if ! sudo mount -t devpts devpts "${CHROOT_DIR}/dev/pts"; then
+            log_error "Error mounting devpts at ${CHROOT_DIR}/dev/pts"
+            exit 1
+        fi
+    fi
 }
 
 function unmount_filesystems() {
-    local dirs=(dev proc sys tmp)
+    local dirs=(dev/pts dev proc sys tmp)
     local any_mounted=0
     for d in "${dirs[@]}"; do
         if mountpoint -q "${CHROOT_DIR}/$d"; then
