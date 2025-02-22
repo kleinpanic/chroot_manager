@@ -238,7 +238,10 @@ function post_process_daemon_logs() {
     # Adjust ownership and permissions of the daemon log directory and its contents.
     if [ -n "$SUDO_USER" ]; then
         log_info "Changing ownership of $DAEMON_LOG_DIR to user $SUDO_USER"
+        echo "Changing ownership of $DAEMON_LOG_DIR to user $SUDO_USER"
         sudo chown -R "$SUDO_USER":"$SUDO_USER" "$DAEMON_LOG_DIR"
+    else 
+	echo "No fucking Sudo User Bitchass"
     fi
     log_info "Setting permissions on $DAEMON_LOG_DIR and its files."
     # Directories: rwxr-xr-x; Files: rw-r--r--
